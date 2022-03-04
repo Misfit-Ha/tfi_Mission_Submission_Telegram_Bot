@@ -1,4 +1,4 @@
-# tfi_Mission_Submission_Bot
+# tfi_Mission_Submission_Telegram_Bot
 simple bot we use to notify admin group a new mission file was sent so an admin can take the task of testing it.
 made with google app script
 
