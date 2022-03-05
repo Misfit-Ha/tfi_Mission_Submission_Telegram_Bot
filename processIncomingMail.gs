@@ -1,9 +1,3 @@
-/*
- * Note:
- * If you need any paid assistant, please write to support.waqar@gmail.com
- * We provide Apps Script Development services at very reasonable price.
- */
-
 // GLOBALS
 //Array of file extension which you would like to extract to Drive
 var fileTypesToExtract = ['pbo', 'rar', 'zip'];
@@ -52,6 +46,7 @@ function GmailToDrive(){
         sheet1.appendRow([attachmentName, '-', '-', '-', '-', '-']);
         var greenAreasRange = sheet1.getRange("A:F");
         greenAreasRange.setHorizontalAlignment("center");
+	greenAreasRange.removeDuplicates([1]);
         MailApp.sendEmail(emails, 'Mission Recived', 'One of the admins will upload and test it asap. https://docs.google.com/spreadsheets/d/e/2PACX-1vRz762EzEcsvZ7IDDvSuXncGXUEk63v41fMwmEtkN-oz8iOGbcp4Okwm8QvQ8kH5-QMQxyw4uV32YM6/pubhtml?gid=0&single=true ')
       }
 	}
