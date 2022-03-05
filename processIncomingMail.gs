@@ -109,7 +109,7 @@ function buidlMessage_(emailBody, senderEmail, attachmentName, FileLink){
       
 <b>DL Link:</b> <a href="${FileLink}">Google Drive Link</a> 
         
-<b>Spreedsheet:</b> <a href="https://docs.google.com/spreadsheets/d/10CZJU5CRl-BE1KX9NLjUYYJhcaz2E1I_0RCRQyKUX58/edit?usp=sharing">Sheet link</a> 
+<b>Spreadsheet:</b> <a href="https://docs.google.com/spreadsheets/d/10CZJU5CRl-BE1KX9NLjUYYJhcaz2E1I_0RCRQyKUX58/edit?usp=sharing">Sheet link</a> 
         
 ${ifBodyAvailable}
 <tg-spoiler>@Alireza_HosseinAbady @PORIYA_BE @hossein0hs</tg-spoiler>
