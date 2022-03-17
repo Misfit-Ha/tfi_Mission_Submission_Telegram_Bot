@@ -1,8 +1,9 @@
-   
-const TG_API_TOKEN = "5116882161:AAFZ95i4j3g28bxovk40lz9LZGpUyEEEn1I"; 
+const TG_API_TOKEN = "5116882161:AAFHwiOrUMjby9V73hlNSe00Tm953t0OJ9Q"; 
 const TG_API_URL = "https://api.telegram.org/bot" + TG_API_TOKEN;
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz5BjKnsAX4j2du_AABn9x7WDUG91BJTBFyAr7N7h3n3McJiHBB/exec";
-const CHAT_ID = "-706255843";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwNsCMBrFyiXTgi-KI9CFuPY_4DFyExxI3itfTQkyKE8HbBF7M/exec";
+const CHAT_ID = "-1001174574374";
+//const MP_MISSIONS_FOLDER_ID = '1-4mz_nRvgNXmCudSJQdaT_Oc2SDj_cpT';
+//var mpmissionsFolder = DriveApp.getFolderById(MP_MISSIONS_FOLDER_ID);
 
 
 function setWebhook() {
@@ -65,6 +66,22 @@ function replaceRow(findValue,val, colume) {
   }
 }
 
+function deleteFileInFolder(myFileName, folderId) {
+  var allFiles, idToDLET, myFolder, rtrnFromDLET, thisFile;
+
+  myFolder = DriveApp.getFolderById(folderId);
+
+  allFiles = myFolder.getFilesByName(myFileName);
+
+  while (allFiles.hasNext()) {//If there is another element in the iterator
+    thisFile = allFiles.next();
+    idToDLET = thisFile.getId();
+    //Logger.log('idToDLET: ' + idToDLET);
+
+    rtrnFromDLET = Drive.Files.remove(idToDLET);
+  };
+};
+
 //every google app need to have a doPost or doGet
 function doPost(e) {
   var json = e.postData.contents;
@@ -78,18 +95,27 @@ function doPost(e) {
   var replyToUsername = contents.message.reply_to_message.from.username;
   var replyToText = contents.message.reply_to_message.text;
   var replyToEntities = contents.message.reply_to_message.entities;
-  var thankyouText = `thank you ${firstName} for the upload\ud83d\udc4d\nspread sheet updated\ud83d\udc4d`;
+  testLog(replyToEntities);
+  var thankyouText = `Mission will be uploaded by ${firstName}`;
   var newText =`${replyToText}\n\n${thankyouText}`;
-  var indexOfThankyou = newText.lastIndexOf("thank");
+
+  var indexOfThankyou = newText.lastIndexOf("Mission will");
     //Gets mission name from replyToText
     var missionName = replyToText.substring(      
       replyToText.indexOf("Name") + 6, 
-      replyToText.indexOf("DL")
+      replyToText.indexOf("Sender")
     ).trim();
+      var emailAdress = replyToText.substring(      
+      replyToText.indexOf('(') +1 , 
+      replyToText.indexOf(')')
+    );
   var newEntities = [{offset:indexOfThankyou, length:thankyouText.length, type:'bold'},{"offset":indexOfThankyou, "length":thankyouText.length, "type":"underline"},{"offset":indexOfThankyou, "length":thankyouText.length, "type":"italic"}];
   var mergedEntities =replyToEntities.concat(newEntities);
-  
-  
+  var fileLink = mergedEntities[6].url;
+  var fileId = fileLink.substring(      
+    fileLink.indexOf("/d/") + 3, 
+    fileLink.indexOf("/view")
+  );
   if (text=='\ud83d\udc4d' && replyToUsername == 'missionSubmissionBot') {
     deleteMessage(groupId, messageId);
     sendMessage(chat_id, 'thanks for the upload');
@@ -97,5 +123,9 @@ function doPost(e) {
     replaceRow (missionName,'yes', 'B');
     var update_objects = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("update_objects");
     update_objects.appendRow([json]);
+    //deleteFileInFolder(missionName, MP_MISSIONS_FOLDER_ID); 
+    //var file = DriveApp.getFileById(fileId);
+    //file.moveTo(mpmissionsFolder);
+    MailApp.sendEmail(emailAdress, 'Mission Was Uploaded', `Your mission was uploaded to the server by ${firstName}`);
   }
 }
