@@ -46,8 +46,8 @@ function GmailToDrive(){
         sheet1.appendRow([attachmentName, '-', '-', '-', '-', '-']);
         var greenAreasRange = sheet1.getRange("A:F");
         greenAreasRange.setHorizontalAlignment("center");
-	greenAreasRange.removeDuplicates([1]);
-        MailApp.sendEmail(emails, 'Mission Recived', 'One of the admins will upload and test it asap. https://docs.google.com/spreadsheets/d/e/2PACX-1vRz762EzEcsvZ7IDDvSuXncGXUEk63v41fMwmEtkN-oz8iOGbcp4Okwm8QvQ8kH5-QMQxyw4uV32YM6/pubhtml?gid=0&single=true ')
+        MailApp.sendEmail(emails, 'Mission Recived', 'an admin will upload and test it asap. https://docs.google.com/spreadsheets/d/e/2PACX-1vRz762EzEcsvZ7IDDvSuXncGXUEk63v41fMwmEtkN-oz8iOGbcp4Okwm8QvQ8kH5-QMQxyw4uV32YM6/pubhtml?gid=0&single=true ');
+        greenAreasRange.removeDuplicates([1]);
       }
 	}
 	threads[i].addLabel(label);
@@ -95,24 +95,29 @@ function checkIfDefinedType_(attachment){
   else return false;
 }
 
+
+
 function buidlMessage_(emailBody, senderEmail, attachmentName, FileLink){
   var ifBodyAvailable ='';
   if(emailBody.length > 3){
     ifBodyAvailable = 
-`<b>Sender Email: </b>${senderEmail}
-
-<b>Email Body: </b>${emailBody}`
+`<b>
+Email Body: </b>${emailBody}`
   }
   var longMessage = 
 `<b><u>A new mission Received!</u></b>
+  
 <b>File Name:</b> ${attachmentName}
+
+<b>Sender Email: </b>(${senderEmail})
       
 <b>DL Link:</b> <a href="${FileLink}">Google Drive Link</a> 
         
-<b>Spreadsheet:</b> <a href="https://docs.google.com/spreadsheets/d/10CZJU5CRl-BE1KX9NLjUYYJhcaz2E1I_0RCRQyKUX58/edit?usp=sharing">Sheet link</a> 
-        
+<b>Spreadsheet:</b> <a href="https://docs.google.com/spreadsheets/d/10CZJU5CRl-BE1KX9NLjUYYJhcaz2E1I_0RCRQyKUX58/edit?usp=sharing">Sheet link</a>      
 ${ifBodyAvailable}
-<tg-spoiler>@Alireza_HosseinAbady @PORIYA_BE @hossein0hs</tg-spoiler>
+<tg-spoiler>@Alireza_HosseinAbady @hossein0hs @Lightning30k</tg-spoiler>
+
+<i>Reply with '👍' and upload this mission to the server.</i>
         
 <i>beep boop</i>`;
         
