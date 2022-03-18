@@ -1,8 +1,8 @@
-const TG_API_TOKEN = "5116882161:AAFHwiOrUMjby9V73hlNSe00Tm953t0OJ9Q"; 
+const TG_API_TOKEN = "5116831231231:AAFHwiOdasdsadjby9V73hlNSe00Tm953t0OJ9Q"; 
 const TG_API_URL = "https://api.telegram.org/bot" + TG_API_TOKEN;
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwNsCMBrFyiXTgi-KI9CFuPY_4DFyExxI3itfTQkyKE8HbBF7M/exec";
-const CHAT_ID = "-1001174574374";
-//const MP_MISSIONS_FOLDER_ID = '1-4mz_nRvgNXmCudSJQdaT_Oc2SDj_cpT';
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwNsCMBrFyiXTgi-KI9dasdasdFyExxI3itfTQkyKE8Had7M/exec";
+const CHAT_ID = "-10011741242174";
+//const MP_MISSIONS_FOLDER_ID = '1-4mz_nRvgNXmasdsadT_Oc2sdas_cpT';
 //var mpmissionsFolder = DriveApp.getFolderById(MP_MISSIONS_FOLDER_ID);
 
 
